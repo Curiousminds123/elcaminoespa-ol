@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Camino al Español A2–B1</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--g:#58cc02;--gd:#46a302;--b:#1cb0f6;--r:#ff4b4b;--y:#ffc800;--t:#3c3c3c;--m:#777;--l:#e5e5e5;--bg:#fff;--safe:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}html,body{margin:0;background:#fff;color:var(--t);font-family:Nunito,system-ui,sans-serif}
+body{padding-top:var(--safe);padding-bottom:env(safe-area-inset-bottom,0px)}
+.top{position:sticky;top:var(--safe);z-index:5;background:#fff;border-bottom:2px solid var(--l);display:flex;gap:16px;justify-content:flex-end;padding:10px 20px;font-weight:900}
+.app{display:flex;min-height:100vh}
+nav{width:270px;border-right:2px solid var(--l);padding:16px;position:sticky;top:44px;height:calc(100vh - 44px);overflow:auto;flex-shrink:0}
+nav h4{margin:14px 6px 6px;color:var(--m);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.mi{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 12px;border-radius:12px;font:800 15px Nunito;color:var(--t);cursor:pointer}
+.mi:hover{background:#f3f3f3}.mi.on{background:#ddf4ff;color:var(--b)}.mi.soon{color:#aaa}
+.sub{margin:2px 0 6px 14px;border-left:3px solid var(--l)}.sub .mi{font-weight:700;font-size:14px;padding:6px 12px}
+main{flex:1;max-width:760px;margin:0 auto;padding:24px 20px 80px}
+h1{font-weight:900;margin:0 0 4px}h2{margin:0 0 12px}
+.path{display:flex;flex-direction:column;align-items:center;gap:14px;margin:24px 0}
+.path h3{margin:18px 0 0;color:var(--m);font-size:14px;text-transform:uppercase;letter-spacing:.08em}
+.node{width:76px;height:70px;border-radius:50%;border:0;border-bottom:7px solid var(--gd);background:var(--g);color:#fff;font:900 22px Nunito;cursor:pointer;position:relative}
+.node:active{transform:translateY(4px);border-bottom-width:3px}
+.node.v{background:var(--b);border-bottom-color:#1899d6}.node.soon{background:var(--l);border-bottom-color:#c4c4c4;color:#aaa;cursor:default}
+.lab{font-size:13px;font-weight:800;color:var(--m);margin-top:-8px;text-align:center}
+.card{border:2px solid var(--l);border-radius:16px;padding:18px;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}th,td{border:1px solid var(--l);padding:6px 9px;text-align:left}th{background:#f7f7f7}
+.en{color:var(--m);font-style:italic;font-weight:400}.reg{color:var(--b);font-weight:800}.irr{color:var(--r);font-weight:800}
+.btn{border:0;border-bottom:5px solid var(--gd);background:var(--g);color:#fff;font:900 16px Nunito;padding:12px 26px;border-radius:14px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+.btn.sec{background:#fff;color:var(--b);border:2px solid var(--l);border-bottom-width:4px}
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--l);border-bottom-width:4px;background:#fff;border-radius:14px;padding:13px 16px;margin:9px 0;font:800 17px Nunito;cursor:pointer}
+.opt:hover{background:#f7f7f7}.opt.ok{background:#d7ffb8;border-color:var(--g)}.opt.no{background:#ffdfe0;border-color:var(--r)}
+input.fill{width:100%;border:2px solid var(--l);border-radius:14px;padding:13px;font:800 17px Nunito;margin:9px 0}
+.bar{height:14px;background:var(--l);border-radius:9px;overflow:hidden;margin-bottom:20px}.bar i{display:block;height:100%;background:var(--g);transition:width .3s}
+.fb{margin-top:14px;padding:14px;border-radius:14px;font-weight:800}.fb.ok{background:#d7ffb8;color:var(--gd)}.fb.no{background:#ffdfe0;color:#c33}
+u{text-decoration-color:var(--g);text-decoration-thickness:3px;text-underline-offset:3px;font-weight:800}
+.flash{min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:22px;font-weight:800;padding:24px;border:2px solid var(--l);border-bottom-width:6px;border-radius:20px;cursor:pointer;background:#f7fcff}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+@media(max-width:800px){.app{flex-direction:column}nav{width:100%;height:auto;position:static;border-right:0;border-bottom:2px solid var(--l);max-height:38vh}}
+</style></head><body>
+<div class="top"><span>🔥 <b id="st">0</b></span><span>⭐ <b id="xp">0</b> XP</span><span>❤️ <b id="hp">5</b></span></div>
+<div class="app"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const $=s=>document.querySelector(s);
+const MODS=[
+{id:"ser",t:"Ser y estar",k:"g",
+th:`<div class="card"><h2>Ser y estar <span class="en">(both mean "to be")</span></h2>
+<table><tr><th></th><th>SER</th><th>ESTAR</th></tr><tr><td>yo</td><td>soy</td><td>estoy</td></tr><tr><td>tú</td><td>eres</td><td>estás</td></tr><tr><td>él/ella/usted</td><td>es</td><td>está</td></tr><tr><td>nosotros</td><td>somos</td><td>estamos</td></tr><tr><td>vosotros</td><td>sois</td><td>estáis</td></tr><tr><td>ellos/ustedes</td><td>son</td><td>están</td></tr></table></div>
+<div class="card"><h3>SER = identidad, origen, profesión, hora, características</h3>
+<p>Soy estudiante. <span class="en">I'm a student.</span><br>Es de México. <span class="en">He's from Mexico.</span><br>Son las tres. <span class="en">It's three o'clock.</span><br>La fiesta es en mi casa. <span class="en">The party is at my house (event).</span></p>
+<h3>ESTAR = lugar, estados temporales, emociones, acciones (estoy comiendo)</h3>
+<p>Madrid está en España. <span class="en">Madrid is in Spain.</span><br>Estoy cansado. <span class="en">I'm tired.</span><br>La sopa está fría. <span class="en">The soup is cold (right now).</span></p>
+<p><b>Truco / Trick:</b> Ser = <i>what something IS</i>. Estar = <i>how/where something IS right now</i>.</p></div>`,
+ex:[["Mi hermana ___ profesora.",["es","está"],0,"My sister is a teacher."],["Hoy ___ muy cansado.",["soy","estoy"],1,"Today I'm very tired."],["La fiesta ___ en mi casa.",["es","está"],0,"The party is at my house."],["Madrid ___ en España.",["es","está"],1,"Madrid is in Spain."],["Ellos ___ de Colombia.",["son","están"],0,"They are from Colombia."],["La sopa ___ fría.",["es","está"],1,"The soup is cold."],["¿Qué hora ___?",["es","está"],0,"What time is it?"],["Nosotros ___ contentos hoy. (estar)","estamos","We are happy today."]],
+tx:`Me llamo Lucía y <u>soy</u> de Sevilla. <u>Soy</u> profesora de inglés. Hoy <u>estoy</u> un poco cansada porque <u>es</u> lunes. Mi casa <u>está</u> cerca del centro y <u>es</u> muy luminosa. Ahora <u>estoy</u> en el trabajo y mis alumnos <u>están</u> en clase.`,
+q:[["¿De dónde es Lucía?",["De Madrid","De Sevilla","De Inglaterra"],1],["¿Por qué está cansada?",["Porque es lunes","Porque no come","Porque está enferma"],0],["¿Dónde está su casa?",["Lejos","En el trabajo","Cerca del centro"],2]],
+sp:["Preséntate: ¿cómo te llamas, de dónde eres y qué haces?","¿Cómo estás hoy y por qué?","Describe a tu mejor amigo/a (¿cómo es?).","¿Dónde está tu casa? ¿Cómo es?","¿Cómo es tu ciudad? ¿Dónde está?"]},
+{id:"irr",t:"Presente irregular",k:"g",
+th:`<div class="card"><h2>Presente regular <span class="en">(regular verbs)</span></h2>
+<table><tr><th></th><th>-AR hablar</th><th>-ER comer</th><th>-IR vivir</th></tr><tr><td>yo</td><td>habl<b class="reg">o</b></td><td>com<b class="reg">o</b></td><td>viv<b class="reg">o</b></td></tr><tr><td>tú</td><td>habl<b class="reg">as</b></td><td>com<b class="reg">es</b></td><td>viv<b class="reg">es</b></td></tr><tr><td>él/ella</td><td>habl<b class="reg">a</b></td><td>com<b class="reg">e</b></td><td>viv<b class="reg">e</b></td></tr><tr><td>nosotros</td><td>habl<b class="reg">amos</b></td><td>com<b class="reg">emos</b></td><td>viv<b class="reg">imos</b></td></tr><tr><td>vosotros</td><td>habl<b class="reg">áis</b></td><td>com<b class="reg">éis</b></td><td>viv<b class="reg">ís</b></td></tr><tr><td>ellos</td><td>habl<b class="reg">an</b></td><td>com<b class="reg">en</b></td><td>viv<b class="reg">en</b></td></tr></table></div>
+<div class="card"><h2>Irregulares importantes <span class="en">(key irregulars)</span></h2>
+<table><tr><th></th><th>ir <i class="en">go</i></th><th>tener <i class="en">have</i></th><th>hacer <i class="en">do/make</i></th><th>querer <i class="en">want</i></th><th>poder <i class="en">can</i></th></tr>
+<tr><td>yo</td><td class="irr">voy</td><td class="irr">tengo</td><td class="irr">hago</td><td class="irr">quiero</td><td class="irr">puedo</td></tr><tr><td>tú</td><td class="irr">vas</td><td class="irr">tienes</td><td>haces</td><td class="irr">quieres</td><td class="irr">puedes</td></tr><tr><td>él/ella</td><td class="irr">va</td><td class="irr">tiene</td><td>hace</td><td class="irr">quiere</td><td class="irr">puede</td></tr><tr><td>nosotros</td><td class="irr">vamos</td><td>tenemos</td><td>hacemos</td><td>queremos</td><td>podemos</td></tr><tr><td>vosotros</td><td class="irr">vais</td><td>tenéis</td><td>hacéis</td><td>queréis</td><td>podéis</td></tr><tr><td>ellos</td><td class="irr">van</td><td class="irr">tienen</td><td>hacen</td><td class="irr">quieren</td><td class="irr">pueden</td></tr></table>
+<table><tr><th>verbo</th><th>yo</th><th>tú</th><th>él</th><th>nos.</th><th>ellos</th></tr><tr><td>venir <i class="en">come</i></td><td class="irr">vengo</td><td class="irr">vienes</td><td class="irr">viene</td><td>venimos</td><td class="irr">vienen</td></tr><tr><td>decir <i class="en">say</i></td><td class="irr">digo</td><td class="irr">dices</td><td class="irr">dice</td><td>decimos</td><td class="irr">dicen</td></tr><tr><td>saber <i class="en">know</i></td><td class="irr">sé</td><td>sabes</td><td>sabe</td><td>sabemos</td><td>saben</td></tr><tr><td>salir <i class="en">go out</i></td><td class="irr">salgo</td><td>sales</td><td>sale</td><td>salimos</td><td>salen</td></tr><tr><td>poner <i class="en">put</i></td><td class="irr">pongo</td><td>pones</td><td>pone</td><td>ponemos</td><td>ponen</td></tr><tr><td>dar <i class="en">give</i></td><td class="irr">doy</td><td>das</td><td>da</td><td>damos</td><td>dan</td></tr></table>
+<p><span class="irr">Rojo</span> = cambio irregular. <span class="en">Red = irregular form. Stem changes (e→ie, o→ue, e→i) don't affect nosotros/vosotros.</span></p></div>`,
+ex:[["Yo ___ dos hermanos. (tener)","tengo","I have two siblings."],["Ella ___ al cine. (ir)","va","She goes to the cinema."],["Nosotros ___ pizza. (querer)","queremos","We want pizza."],["¿Tú ___ venir mañana? (poder)",["puedes","podes","puedas"],0,"Can you come tomorrow?"],["Yo ___ deporte los lunes.",["hago","hace","hacho"],0,"I do sport on Mondays."],["Ellos ___ la verdad. (decir)","dicen","They tell the truth."],["Yo no ___ la respuesta.",["sabo","sé","sabe"],1,"I don't know the answer."],["Yo ___ a las ocho. (salir)",["salo","salgo","salo"],1,"I leave at eight."]],
+tx:`Todos los días <u>me levanto</u> a las siete y <u>desayuno</u> café con tostadas. Mi hermano <u>tiene</u> clase a las nueve, así que <u>sale</u> pronto. Yo <u>voy</u> al trabajo en metro. Por la tarde <u>hago</u> deporte y mis amigos <u>quieren</u> cenar fuera, pero yo no <u>puedo</u> porque <u>tengo</u> que estudiar.`,
+q:[["¿Cómo va al trabajo?",["En coche","En metro","A pie"],1],["¿Qué hace por la tarde?",["Deporte","Compras","Nada"],0],["¿Por qué no cena con sus amigos?",["Está enfermo","Tiene que estudiar","No quiere"],1]],
+sp:["¿Qué haces todos los días? Usa 'voy', 'tengo', 'hago'.","¿Qué quieres hacer este fin de semana?","¿Qué puedes hacer muy bien? ¿Qué no puedes hacer?","¿A qué hora sales de casa?","¿Qué dices cuando no sabes algo?"]},
+{id:"food",t:"Comida y restaurante",k:"v",
+th:`<div class="card"><h2>En el restaurante <span class="en">(at the restaurant)</span></h2>
+<table><tr><th>Español</th><th>English</th></tr><tr><td>la carta / el menú</td><td>menu</td></tr><tr><td>la cuenta</td><td>the bill</td></tr><tr><td>el camarero / la camarera</td><td>waiter / waitress</td></tr><tr><td>el primer plato / el postre</td><td>starter / dessert</td></tr><tr><td>la propina</td><td>tip</td></tr><tr><td>el pollo, el pescado, la carne</td><td>chicken, fish, meat</td></tr><tr><td>las verduras, la fruta</td><td>vegetables, fruit</td></tr><tr><td>picante, dulce, salado</td><td>spicy, sweet, salty</td></tr></table></div>
+<div class="card"><h3>Frases útiles <span class="en">(useful phrases)</span></h3><p>Una mesa para dos, por favor. <span class="en">A table for two, please.</span><br>Quisiera la paella. <span class="en">I would like the paella.</span><br>¿Nos trae la cuenta, por favor? <span class="en">Could you bring us the bill?</span><br>Estaba riquísimo. <span class="en">It was delicious.</span></p></div>`,
+ex:[["la cuenta",["the bill","the menu","the tip"],0,"la cuenta = the bill"],["el camarero",["cook","waiter","customer"],1,"el camarero = waiter"],["Quisiera ___ la carta, por favor.",["ver","ser","dar"],0,"I'd like to see the menu."],["Para beber, ___ agua con gas.",["quisiera","quiere","quieren"],0,"To drink, I'd like sparkling water."],["Dulce es lo contrario de...",["salado","caliente","rico"],0,"Sweet is the opposite of salty."],["el postre",["dessert","starter","drink"],0,"el postre = dessert"],["¿Nos trae la ___, por favor?","cuenta","Could you bring us the bill?"],["Una ___ para dos, por favor.","mesa","A table for two, please."]],
+tx:`Ayer fuimos a un restaurante nuevo. El <u>camarero</u> nos dio la <u>carta</u> y pedimos de <u>primer plato</u> una ensalada. De segundo, yo tomé <u>pescado</u> con <u>verduras</u> y mi novio, <u>carne</u>. De <u>postre</u> compartimos una tarta. Estaba riquísimo. Al final pedimos la <u>cuenta</u> y dejamos una <u>propina</u>.`,
+q:[["¿Qué pidieron de primer plato?",["Sopa","Ensalada","Paella"],1],["¿Qué comió el novio?",["Carne","Pescado","Pollo"],0],["¿Qué dejaron al final?",["Una nota","Una propina","Nada"],1]],
+sp:["¿Cuál es tu plato favorito? Descríbelo.","Estás en un restaurante: pide una mesa y tu comida.","¿Qué comes normalmente para desayunar?","¿Te gusta la comida picante? ¿Por qué?","¿Qué plato típico de tu país recomiendas?"]}];
+const GR=["Presente regular","Presente irregular","Ser y estar","Por y para","Pretérito indefinido","Pretérito imperfecto","Pretérito perfecto","Futuro","Condicional","Frases hechas y coloquiales"];
+const VO=["Familia y amigos","La casa","Comida y restaurante","La ciudad y transporte","Ropa y compras","Viajes y hotel","Salud y cuerpo","Trabajo y estudios","Tiempo libre y deporte","Tiempo y naturaleza"];
+const ALL=[...GR.map((t,i)=>({t,k:"g",n:i+1})),...VO.map((t,i)=>({t,k:"v",n:i+1}))].map(o=>{const m=MODS.find(m=>m.t===o.t||(m.id==="ser"&&o.t==="Ser y estar")||(m.id==="irr"&&o.t==="Presente irregular")||(m.id==="food"&&o.t==="Comida y restaurante"));return {...o,m}});
+let S={xp:0,st:0,hp:5,done:{}};try{S=Object.assign(S,JSON.parse(localStorage.getItem("ce")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("ce",JSON.stringify(S))}catch(e){}$("#xp").textContent=S.xp;$("#st").textContent=S.st;$("#hp").textContent=S.hp};
+let ac;function snd(f,d=.15,t="sine"){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.type=t;o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const good=()=>{snd(660);setTimeout(()=>snd(880),110)},bad=()=>snd(180,.3,"sawtooth");
+const say=t=>{try{const u=new SpeechSynthesisUtterance(t);u.lang="es-ES";speechSynthesis.speak(u)}catch(e){}};
+let cur=null,tab="th",open=null;
+function nav(){let h="<h1 style='font-size:20px'>🇪🇸 Camino</h1><button class='mi' onclick='home()'>🏠 Inicio</button>";
+[["g","Gramática"],["v","Vocabulario"]].forEach(([k,n])=>{h+=`<h4>${n}</h4>`;ALL.filter(o=>o.k===k).forEach(o=>{const on=o.m&&open===o.m.id;h+=`<button class="mi ${on?'on':''} ${o.m?'':'soon'}" onclick="${o.m?`pick('${o.m.id}')`:''}">${o.n}. ${o.t}${o.m?'':' 🔒'}</button>`;
+if(on)h+=`<div class="sub">${[["th","📘 Teoría"],["ex","🎯 Ejercicios"],["tx","📖 Lectura"],["sp","🗣️ Speaking"]].map(([t,l])=>`<button class="mi ${tab===t?'on':''}" onclick="go('${t}')">${l}</button>`).join("")}</div>`})});
+$("#nav").innerHTML=h}
+function home(){open=null;nav();let h=`<h1>Camino al Español</h1><p class="en">Nivel A2–B1 · Tu ruta de aprendizaje</p><div class="path">`;
+[["g","Gramática"],["v","Vocabulario"]].forEach(([k,n])=>{h+=`<h3>${n}</h3>`;ALL.filter(o=>o.k===k).forEach((o,i)=>{const off=Math.sin(i*1.1)*60;h+=`<button class="node ${o.k==='v'?'v':''} ${o.m?'':'soon'}" style="transform:translateX(${off}px)" onclick="${o.m?`pick('${o.m.id}')`:''}">${o.m?(S.done[o.m.id]?'✓':o.n):'🔒'}</button><div class="lab" style="transform:translateX(${off}px)">${o.t}</div>`})});
+$("#main").innerHTML=h+"</div>"}
+function pick(id){open=id;cur=MODS.find(m=>m.id===id);go("th")}
+function go(t){tab=t;nav();window.scrollTo(0,0);({th:()=>$("#main").innerHTML=`<h1>${cur.t}</h1>`+cur.th+`<button class="btn" onclick="go('ex')">Practicar →</button>`,ex:ex,tx:tx,sp:sp})[t]()}
+let i,ok,hits;
+function ex(){i=0;hits=0;S.hp=5;save();qn()}
+function qn(){const e=cur.ex[i],n=cur.ex.length;if(i>=n||S.hp<=0){const w=S.hp>0;if(w){S.st++;S.done[cur.id]=1;save()}return $("#main").innerHTML=`<div class="card" style="text-align:center"><h1>${w?'🎉 ¡Muy bien!':'💔 Sin vidas'}</h1><p>${hits}/${n} correctas</p><div class="row" style="justify-content:center"><button class="btn sec" onclick="ex()">Repetir</button><button class="btn" onclick="go('tx')">Lectura →</button></div></div>`}
+const m=Array.isArray(e[1]);$("#main").innerHTML=`<div class="bar"><i style="width:${i/n*100}%"></i></div><h2>${e[0]}</h2>`+(m?e[1].map((o,j)=>`<button class="opt" onclick="chk(${j})">${o}</button>`).join(""):`<input class="fill" id="f" placeholder="Escribe aquí…" autocomplete="off" onkeydown="if(event.key==='Enter')chk()"><button class="btn" onclick="chk()">Comprobar</button>`)+`<div id="fb"></div>`;ok=null;const f=$("#f");f&&f.focus()}
+function chk(j){if(ok!==null)return;const e=cur.ex[i],m=Array.isArray(e[1]);let r,ans;
+if(m){r=j===e[2];ans=e[1][e[2]];document.querySelectorAll(".opt").forEach((b,k)=>{b.disabled=1;if(k===e[2])b.classList.add("ok");else if(k===j)b.classList.add("no")})}else{ans=e[1];r=$("#f").value.trim().toLowerCase()===ans.toLowerCase();$("#f").disabled=1}
+ok=r;const tr=m?e[3]:e[2];if(r){hits++;S.xp+=10;good()}else{S.hp--;bad()}save();
+$("#fb").innerHTML=`<div class="fb ${r?'ok':'no'}">${r?'¡Correcto! +10 XP':'Respuesta: '+ans}<br><span class="en" style="font-weight:400">${tr}</span></div><p><button class="btn" onclick="i++;qn()">Continuar</button></p>`}
+function tx(){const q=cur.q;$("#main").innerHTML=`<h1>📖 Lectura</h1><div class="card" style="font-size:19px;line-height:1.8">${cur.tx}</div><button class="btn sec" onclick="say(document.querySelector('.card').textContent)">🔊 Escuchar</button>`+q.map((x,a)=>`<div class="card"><b>${a+1}. ${x[0]}</b>${x[1].map((o,b)=>`<button class="opt" onclick="rq(this,${a},${b})">${o}</button>`).join("")}</div>`).join("")+`<button class="btn" onclick="go('sp')">Speaking →</button>`}
+function rq(el,a,b){const c=cur.q[a][2],p=el.parentNode;if(p.dataset.d)return;p.dataset.d=1;p.querySelectorAll(".opt").forEach((x,k)=>{if(k===c)x.classList.add("ok");else if(x===el)x.classList.add("no")});if(b===c){S.xp+=15;good()}else bad();save()}
+let ci=0;
+function sp(){ci=0;card()}
+function card(){const c=cur.sp;$("#main").innerHTML=`<h1>🗣️ Speaking</h1><p class="en">Tarjeta ${ci+1} / ${c.length} · Responde en voz alta usando el tema.</p><div class="flash" onclick="say('${c[ci].replace(/'/g,"")}')">${c[ci]}</div><div class="row"><button class="btn sec" onclick="say('${c[ci].replace(/'/g,"")}')">🔊 Oír</button><button class="btn sec" onclick="ci=(ci+c.length-1)%c.length;card()">←</button><button class="btn" onclick="S.xp+=5;save();ci=(ci+1)%c.length;card()">Siguiente →</button></div>`}
+save();home();
+</script></body></html>
